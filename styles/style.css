@@ -87,3 +87,7 @@ button:hover {
 #game-section, #reset-btn {
     display: none;
 }
+
+#reset-btn {
+    margin: 0 auto;
+}

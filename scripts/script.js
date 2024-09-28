@@ -1,4 +1,4 @@
-const guessSection = document.querySelector("guess-section");
+const guessSection = document.querySelector("#guess-section");
 const guessInput = document.querySelector("#guess");
 const guessButton = document.querySelector("#guess-btn");
 const resultParagraph = document.querySelector("#result");
@@ -30,5 +30,40 @@ difficultySelect.addEventListener("change", function() {
             break;
     }
 
-    console.log(maxTries);
+    triesLeft = maxTries;
+    triesLeftSpan.textContent = triesLeft;
+
+    randomNumber = Math.floor(Math.random() * 100) + 1;
+
+    difficultySection.style.display = "none";
+    gameSection.style.display = "block";
+    guessSection.style.display = "flex";
+
+    console.log(randomNumber);
+});
+
+guessButton.addEventListener("click", function() {
+    const guess = parseInt(guessInput.value);
+
+    if (isNaN(guess) || guess < 1 || guess > 100) {
+        resultParagraph.textContent = "Por favor insira um numero de 1 a 100";
+    } else {
+        if (guess === randomNumber) {
+            resultParagraph.textContent = `parabéns, você acertou em ${maxTries - triesLeft + 1} tentativa(s)!!!`;
+            resetButton.style.display = "block";
+            guessSection.style.display = "none";
+        } else if (guess > randomNumber) {
+
+            resultParagraph.textContent = "Muito alto. Tente novamente!";
+            triesLeft--;
+
+        } else {
+
+            resultParagraph.textContent = "Muito baixo. Tente novamente!";
+            triesLeft--;
+
+        }
+
+        triesLeftSpan.textContent = triesLeft;
+    }
 })
