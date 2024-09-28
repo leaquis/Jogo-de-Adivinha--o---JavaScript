@@ -39,7 +39,7 @@ difficultySelect.addEventListener("change", function() {
     gameSection.style.display = "block";
     guessSection.style.display = "flex";
 
-    console.log(randomNumber);
+    //console.log(randomNumber);  código para testes, permite ver o numero aleatorio no console
 });
 
 guessButton.addEventListener("click", function() {
@@ -64,6 +64,27 @@ guessButton.addEventListener("click", function() {
 
         }
 
+        if (triesLeft === 0) {
+            resultParagraph.textContent = `Suas tentativas acabaram. o número correto era ${randomNumber}!`;
+            resetButton.style.display = "block";
+            guessSection.style.display = "none";
+        }
+
         triesLeftSpan.textContent = triesLeft;
+
+        guessInput.value = "";
     }
-})
+});
+
+function resetGame() {
+    difficultySelect.value = "";
+    resultParagraph.textContent = "";
+
+    difficultySection.style.display = "flex";
+    gameSection.style.display = "none";
+    guessSection.style.display = "none";
+    resetButton.style.display = "none";
+
+}
+
+resetButton.addEventListener("click", resetGame);
